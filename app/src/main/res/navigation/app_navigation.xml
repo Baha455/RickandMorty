@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/charactersFragment">
+
+    <fragment
+        android:id="@+id/charactersFragment"
+        android:name="com.example.rickandmorty.presentation.fragments.characters.CharactersFragment"
+        android:label="characters_fragment"
+        tools:layout="@layout/characters_fragment" >
+        <action
+            android:id="@+id/action_charactersFragment_to_charDetailFragment"
+            app:destination="@id/charDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/episodesFragment"
+        android:name="com.example.rickandmorty.presentation.fragments.episodes.EpisodesFragment"
+        android:label="episodes_fragment"
+        tools:layout="@layout/episodes_fragment" />
+    <fragment
+        android:id="@+id/locationsFragment"
+        android:name="com.example.rickandmorty.presentation.fragments.locations.LocationsFragment"
+        android:label="location_fragment"
+        tools:layout="@layout/location_fragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.rickandmorty.presentation.fragments.search.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
+    <fragment
+        android:id="@+id/charDetailFragment"
+        android:name="com.example.rickandmorty.presentation.fragments.characters.CharDetailFragment"
+        android:label="char_detail_fragment"
+        tools:layout="@layout/char_detail_fragment" >
+        <argument
+            android:name="characters"
+            app:argType="com.example.rickandmorty.models.Characters" />
+    </fragment>
+</navigation>
