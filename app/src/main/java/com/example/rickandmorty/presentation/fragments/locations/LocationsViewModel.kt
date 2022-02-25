@@ -15,9 +15,13 @@ class LocationsViewModel(private val repository: RickAndMortyRepository):ViewMod
 
     private val getLocationsListUseCase = GetLocationsListUseCase(repository)
 
-    fun getLocations(){
+    init {
+        getLocations(1)
+    }
+
+    fun getLocations(page: Int){
         viewModelScope.launch(Dispatchers.IO) {kotlin.runCatching {
-            val call = getLocationsListUseCase.getLocationsList()
+            val call = getLocationsListUseCase.getLocationsList(page)
             if (call.isSuccessful)locations.postValue(call.body()?.results)
         }  }
     }

@@ -6,7 +6,7 @@ import retrofit2.Response
 
 class GetLocationsListUseCase(private val repository: RickAndMortyRepository) {
 
-    suspend fun getLocationsList(): Response<LocationsInfo> {
-        return repository.getLocationsList()
+    suspend fun getLocationsList(page: Int): Response<LocationsInfo> {
+        return repository.getLocationsList(page)
     }
 }

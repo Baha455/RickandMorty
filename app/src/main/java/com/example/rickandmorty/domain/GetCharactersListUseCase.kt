@@ -5,7 +5,7 @@ import retrofit2.Response
 
 class GetCharactersListUseCase(private val repository: RickAndMortyRepository) {
 
-    suspend fun getCharactersList(): Response<CharactersInfo>{
-        return repository.getCharactersList()
+    suspend fun getCharactersList(page: Int): Response<CharactersInfo>{
+        return repository.getCharactersList(page)
     }
 }

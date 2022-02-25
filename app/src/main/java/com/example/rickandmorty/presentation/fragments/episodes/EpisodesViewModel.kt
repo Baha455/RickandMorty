@@ -12,13 +12,18 @@ import kotlinx.coroutines.launch
 class EpisodesViewModel(private val repository: RickAndMortyRepository):ViewModel() {
 
     val episodes = MutableLiveData<List<Episodes>>()
+    private val getEpisodesListUseCase = GetEpisodesListUseCase(repository)
 
-    val getEpisodesListUseCase = GetEpisodesListUseCase(repository)
-
-    fun getEpisodes(){
-        viewModelScope.launch(Dispatchers.IO) {kotlin.runCatching {
-            val call = getEpisodesListUseCase.getEpisodes()
-            if (call.isSuccessful)episodes.postValue(call.body()?.results)
-        }  }
+    init {
+        getEpisodes(1)
     }
+
+    fun getEpisodes(page: Int) {
+        viewModelScope.launch(Dispatchers.IO) {kotlin.runCatching {
+            val call = getEpisodesListUseCase.getEpisodes(page)
+            if (call.isSuccessful)episodes.postValue(call.body()?.results)
+            }
+        }
+    }
+
 }

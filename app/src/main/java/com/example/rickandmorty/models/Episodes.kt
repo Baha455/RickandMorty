@@ -1,6 +1,8 @@
 package com.example.rickandmorty.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class EpisodesInfo(
 	@SerializedName("info") val info : InfoEpisodes,
@@ -15,7 +17,7 @@ data class InfoEpisodes (
 	@SerializedName("prev") val prev : String
 )
 
-
+@Parcelize
 data class Episodes (
 	@SerializedName("id") val id : Int,
 	@SerializedName("name") val name : String,
@@ -24,4 +26,4 @@ data class Episodes (
 	@SerializedName("characters") val characters : List<String>,
 	@SerializedName("url") val url : String,
 	@SerializedName("created") val created : String
-)
+) : Parcelable

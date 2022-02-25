@@ -7,10 +7,12 @@
         <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/drawable-v24/search_background.xml" value="0.2203125" />
         <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
         <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/char_detail_fragment.xml" value="0.22" />
-        <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/char_item.xml" value="0.14764492753623187" />
+        <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/char_item.xml" value="0.2" />
         <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/characters_fragment.xml" value="0.18297101449275363" />
+        <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/episodes_detail_fragment.xml" value="0.1358695652173913" />
         <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/episodes_fragment.xml" value="0.18297101449275363" />
         <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/episodes_item.xml" value="0.22" />
+        <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/location_detail_fragment.xml" value="0.14764492753623187" />
         <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/location_fragment.xml" value="0.18297101449275363" />
         <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/locations_item.xml" value="0.25" />
         <entry key="..\:/Users/TechLine/AndroidStudioProjects/RickandMorty/app/src/main/res/layout/recycler_item.xml" value="0.22" />
