@@ -16,17 +16,20 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:hint="Поиск"
-        android:padding="10dp"/>
+        android:textSize="15sp"
+        android:hint="Выберите параметр"
+        android:padding="10dp"
+        android:inputType="textCapSentences"/>
 
     <Spinner
+        android:id="@+id/spinner"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/search_tv"
         app:layout_constraintBottom_toBottomOf="@id/search_tv"
         app:layout_constraintEnd_toEndOf="@id/search_tv"
         android:background="@color/search_background"
-        android:layout_marginEnd="20dp"/>
+        android:layout_marginEnd="10dp"/>
 
     <Button
         android:id="@+id/btnNext"
@@ -46,13 +49,22 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="P"/>
 
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/search_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Поиск"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/locationsRv"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/search_tv"
+        app:layout_constraintTop_toBottomOf="@id/btnSearch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 

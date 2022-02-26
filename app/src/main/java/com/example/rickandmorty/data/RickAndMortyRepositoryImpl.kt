@@ -2,10 +2,7 @@ package com.example.rickandmorty.data
 
 import android.net.Uri
 import com.example.rickandmorty.domain.RickAndMortyRepository
-import com.example.rickandmorty.models.Characters
-import com.example.rickandmorty.models.CharactersInfo
-import com.example.rickandmorty.models.EpisodesInfo
-import com.example.rickandmorty.models.LocationsInfo
+import com.example.rickandmorty.models.*
 import retrofit2.Response
 import retrofit2.http.Url
 
@@ -23,11 +20,55 @@ class RickAndMortyRepositoryImpl(private val service: RickAndMortyApi): RickAndM
         return service.getEpisodesList(page)
     }
 
-    override suspend fun getCharacter(url: Uri): Response<Characters> {
-        return service.getCharacter(url)
+    override suspend fun getCharByUrl(url: Uri): Response<CharactersInfo> {
+        return service.getCharacterByUrl(url)
     }
 
     override suspend fun searchCharByName(name: String): Response<CharactersInfo> {
         return service.searchCharByName(name)
+    }
+
+    override suspend fun searchCharByStatus(status: String): Response<CharactersInfo> {
+        return service.searchCharByStatus(status)
+    }
+
+    override suspend fun searchCharBySpecies(species: String): Response<CharactersInfo> {
+        return service.searchCharBySpecies(species)
+    }
+
+    override suspend fun searchCharByType(type: String): Response<CharactersInfo> {
+        return service.searchCharByType(type)
+    }
+
+    override suspend fun searchCharByGender(gender: String): Response<CharactersInfo> {
+        return service.searchCharByGender(gender)
+    }
+
+    override suspend fun searchLocByName(name: String): Response<LocationsInfo> {
+        return service.searchLocByName(name)
+    }
+
+    override suspend fun searchLocByType(type: String): Response<LocationsInfo> {
+        return service.searchLocByType(type)
+    }
+
+    override suspend fun searchLocByDimension(dimension: String): Response<LocationsInfo> {
+        return service.searchLocByDimension(dimension)
+    }
+
+    override suspend fun searchEpByName(name: String): Response<EpisodesInfo> {
+        return service.searchEpByName(name)
+    }
+
+    override suspend fun searchEpByEp(episode: String): Response<EpisodesInfo> {
+        return service.searchEpByEpisode(episode)
+    }
+
+    override suspend fun getLocByUrl(url: Uri): Response<LocationsInfo> {
+        return service.getLocByUrl(url)
+    }
+
+    override suspend fun getEpByUrl(url: Uri): Response<EpisodesInfo> {
+        return service.getEpByUrl(url)
     }
 }

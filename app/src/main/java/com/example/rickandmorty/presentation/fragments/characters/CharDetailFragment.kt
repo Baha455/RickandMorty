@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.rickandmorty.databinding.CharDetailFragmentBinding
-import com.example.rickandmorty.databinding.CharactersFragmentBinding
+import com.example.rickandmorty.models.Episodes
+import com.example.rickandmorty.presentation.adapter.EpisodeAdapter
 import com.squareup.picasso.Picasso
-import org.koin.android.ext.android.bind
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.ArrayList
 
 class CharDetailFragment:Fragment() {
+
     private lateinit var binding: CharDetailFragmentBinding
     private val args: CharDetailFragmentArgs by navArgs()
 
@@ -19,7 +23,7 @@ class CharDetailFragment:Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = CharDetailFragmentBinding.inflate(layoutInflater)
         return binding.root
@@ -41,4 +45,10 @@ class CharDetailFragment:Fragment() {
         binding.nameName.text = item.name
         binding.statusName.text = item.status
     }
+
 }
+
+
+
+
+

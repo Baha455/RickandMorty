@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Rick and Morty</string>
+
+    <string-array name="parameterChar">
+        <item>Поиск по</item>
+        <item>Имя</item>
+        <item>Статус</item>
+        <item>Расса</item>
+        <item>Тип</item>
+        <item>Гендер</item>
+    </string-array>
+
+    <string-array name="parameterLoc">
+        <item>Поиск по</item>
+        <item>Имя</item>
+        <item>Тип</item>
+        <item>Измере.</item>
+    </string-array>
+
+    <string-array name="parameterEP">
+        <item>Поиск по</item>
+        <item>Имя</item>
+        <item>Эпизод</item>
+    </string-array>
 </resources>
