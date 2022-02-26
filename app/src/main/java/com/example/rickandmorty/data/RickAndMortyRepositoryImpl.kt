@@ -5,8 +5,11 @@ import com.example.rickandmorty.domain.RickAndMortyRepository
 import com.example.rickandmorty.models.*
 import retrofit2.Response
 import retrofit2.http.Url
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RickAndMortyRepositoryImpl(private val service: RickAndMortyApi): RickAndMortyRepository {
+@Singleton
+class RickAndMortyRepositoryImpl @Inject constructor(private val service: RickAndMortyApi): RickAndMortyRepository {
 
     override suspend fun getCharactersList(page: Int): Response<CharactersInfo> {
         return service.getCharactersList(page)

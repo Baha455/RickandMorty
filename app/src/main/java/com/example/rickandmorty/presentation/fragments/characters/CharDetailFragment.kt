@@ -4,15 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.rickandmorty.databinding.CharDetailFragmentBinding
-import com.example.rickandmorty.models.Episodes
-import com.example.rickandmorty.presentation.adapter.EpisodeAdapter
 import com.squareup.picasso.Picasso
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.ArrayList
 
 class CharDetailFragment:Fragment() {
 

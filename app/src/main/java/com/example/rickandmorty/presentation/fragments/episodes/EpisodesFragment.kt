@@ -10,17 +10,19 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.EpisodesFragmentBinding
 import com.example.rickandmorty.models.Episodes
 import com.example.rickandmorty.presentation.adapter.EpisodeAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EpisodesFragment: Fragment() {
 
     private lateinit var binding: EpisodesFragmentBinding
-    private val viewModel by viewModel<EpisodesViewModel>()
+    private val viewModel by viewModels<EpisodesViewModel>()
     private val adapter by lazy { EpisodeAdapter() }
     var page = 1
     lateinit var parameter: String

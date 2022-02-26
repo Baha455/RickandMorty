@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.rickandmorty.databinding.LocationFragmentBinding
 import com.example.rickandmorty.databinding.SearchFragmentBinding
 import com.example.rickandmorty.models.Characters
 import com.example.rickandmorty.models.Episodes
@@ -14,12 +14,13 @@ import com.example.rickandmorty.models.Locations
 import com.example.rickandmorty.presentation.adapter.CharAdapter
 import com.example.rickandmorty.presentation.adapter.EpisodeAdapter
 import com.example.rickandmorty.presentation.adapter.LocationsAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment: Fragment() {
 
     private lateinit var binding: SearchFragmentBinding
-    private val viewModel by viewModel<SearchFragmentViewModel>()
+    private val viewModel by viewModels<SearchFragmentViewModel>()
     private val adapterChar by lazy { CharAdapter() }
     private val adapterLoc by lazy { LocationsAdapter()}
     private val adapterEp by lazy { EpisodeAdapter() }

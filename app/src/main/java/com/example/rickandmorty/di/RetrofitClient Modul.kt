@@ -1,37 +1,41 @@
 package com.example.rickandmorty.di
 
 import com.example.rickandmorty.data.RickAndMortyApi
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.module.Module
-import org.koin.dsl.module
+import com.example.rickandmorty.data.RickAndMortyRepositoryImpl
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
+
+@dagger.Module
+@InstallIn(SingletonComponent::class)
+
+object AppModule {
+
+    @Singleton
+    @Provides
+    fun create(gson: Gson): Retrofit = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .baseUrl("https://rickandmortyapi.com/")
+        .build()
 
 
-val retrofitModule: Module = module { single{ create() }}
+    @Provides
+    fun provideGson(): Gson = GsonBuilder().create()
 
-        fun create(): RickAndMortyApi {
+    @Provides
+    fun provideCharacterService(retrofit: Retrofit): RickAndMortyApi =
+        retrofit.create(RickAndMortyApi::class.java)
 
-            val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+    @Singleton
+    @Provides
+    fun provideRepo(service: RickAndMortyApi) =RickAndMortyRepositoryImpl(service)
+}
 
-            val okHttpClient = OkHttpClient().newBuilder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(logging)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .build()
-
-            val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://rickandmortyapi.com/")
-                .client(okHttpClient)
-                .build()
-
-            return retrofit.create(RickAndMortyApi::class.java)
-        }
 
 
 

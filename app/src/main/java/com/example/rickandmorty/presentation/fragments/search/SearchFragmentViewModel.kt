@@ -1,7 +1,6 @@
 package com.example.rickandmorty.presentation.fragments.search
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ReportFragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.domain.RickAndMortyRepository
@@ -11,12 +10,13 @@ import com.example.rickandmorty.domain.SearchLocByNameUseCase
 import com.example.rickandmorty.models.CharactersInfo
 import com.example.rickandmorty.models.EpisodesInfo
 import com.example.rickandmorty.models.LocationsInfo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.DisposableHandle
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
+import javax.inject.Inject
 
-class SearchFragmentViewModel(private val repository: RickAndMortyRepository):ViewModel() {
+@HiltViewModel
+class SearchFragmentViewModel @Inject constructor(private val repository: RickAndMortyRepository):ViewModel() {
 
     val chars = MutableLiveData<CharactersInfo>()
     val locations = MutableLiveData<LocationsInfo>()

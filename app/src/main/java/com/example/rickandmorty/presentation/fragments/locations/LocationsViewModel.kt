@@ -7,10 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.domain.*
 import com.example.rickandmorty.models.Locations
 import com.example.rickandmorty.models.LocationsInfo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LocationsViewModel(private val repository: RickAndMortyRepository):ViewModel() {
+@HiltViewModel
+class LocationsViewModel @Inject constructor(private val repository: RickAndMortyRepository):ViewModel() {
 
     val locations = MutableLiveData<LocationsInfo>()
 

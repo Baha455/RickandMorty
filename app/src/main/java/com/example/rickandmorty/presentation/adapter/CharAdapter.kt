@@ -60,7 +60,7 @@ class CharAdapter() : ListAdapter<Characters, CharAdapter.MyViewHolder>(diffCall
         val status = binding.status
         val species = binding.species
         val locationName = binding.locationName
-        val episodeName = binding.episodeName
+        //val episodeName = binding.episodeName
         val cardLayout = binding.cardLayout
         }
 }

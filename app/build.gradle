@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
     id("kotlin-parcelize")
+    id 'kotlin-kapt'
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -59,9 +61,8 @@ dependencies {
     //Delegates viewModel
     implementation 'androidx.fragment:fragment-ktx:1.4.0'
 
-    //picasso
+    //picasso для изображений
     implementation 'com.squareup.picasso:picasso:2.71828'
-
 
     //viewBinding
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
@@ -73,11 +74,17 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    // Interceptor
+   /* // Interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 
-    //Koin
+    //Koin изначально был на коине
     implementation "org.koin:koin-core:2.2.2"
-    implementation "org.koin:koin-androidx-viewmodel:2.2.2"
+    implementation "org.koin:koin-androidx-viewmodel:2.2.2"*/
+
+    //hilt
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+    apply plugin: 'kotlin-kapt'
 
 }

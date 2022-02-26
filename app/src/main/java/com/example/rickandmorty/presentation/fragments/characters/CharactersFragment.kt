@@ -10,19 +10,20 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.CharactersFragmentBinding
 import com.example.rickandmorty.models.Characters
 import com.example.rickandmorty.presentation.adapter.CharAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CharactersFragment:Fragment() {
 
     private lateinit var binding: CharactersFragmentBinding
     private val adapter by lazy { CharAdapter() }
-    private val viewModel by viewModel<CharactersViewModel>()
+    private val viewModel by viewModels<CharactersViewModel>()
     var page = 1
     lateinit var parameter: String
     var url: Uri? = null

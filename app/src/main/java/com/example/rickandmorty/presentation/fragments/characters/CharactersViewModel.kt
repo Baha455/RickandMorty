@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.domain.*
 import com.example.rickandmorty.models.CharactersInfo
 import com.example.rickandmorty.models.Info
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
+import javax.inject.Inject
 
-class CharactersViewModel(private val repository: RickAndMortyRepository) :ViewModel() {
+@HiltViewModel
+class CharactersViewModel @Inject constructor(private val repository: RickAndMortyRepository) :ViewModel() {
 
     val characters = MutableLiveData<CharactersInfo>()
     val pages = MutableLiveData<Info>()

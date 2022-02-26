@@ -10,18 +10,19 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.LocationFragmentBinding
 import com.example.rickandmorty.models.Locations
 import com.example.rickandmorty.presentation.adapter.LocationsAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.properties.Delegates
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LocationsFragment: Fragment() {
 
     private lateinit var binding: LocationFragmentBinding
-    private val viewModel by viewModel<LocationsViewModel>()
+    private val viewModel by viewModels<LocationsViewModel>()
     private val adapter by lazy { LocationsAdapter()}
     var page = 1
     lateinit var parameter: String
