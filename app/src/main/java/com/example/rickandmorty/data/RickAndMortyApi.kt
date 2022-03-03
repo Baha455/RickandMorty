@@ -85,11 +85,8 @@ interface RickAndMortyApi {
         @Query("episode") episode: String
     ): Response<EpisodesInfo>
 
-
     @GET()
     suspend fun getEpByUrl(
         @Url() url: Uri
     ): Response<EpisodesInfo>
-
-
 }

@@ -40,20 +40,17 @@ class EpisodeAdapter() : ListAdapter<Episodes, EpisodeAdapter.MyViewHolder>(diff
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val episod =getItem(position)
-        holder.airDate.text = episod.air_date
-        holder.episode.text = episod.episode
-        holder.cardLayount.setOnClickListener{
-            onShopItemClickListener?.invoke(episod)
+        val episode =getItem(position)
+        holder.airDate.text = episode.air_date
+        holder.episode.text = episode.episode
+        holder.cardLayout.setOnClickListener{
+            onShopItemClickListener?.invoke(episode)
         }
     }
 
-    class MyViewHolder(private val binding: EpisodesItemBinding): RecyclerView.ViewHolder(binding.root){
+    class MyViewHolder(binding: EpisodesItemBinding): RecyclerView.ViewHolder(binding.root){
         val airDate = binding.airDate
         val episode = binding.episode
-        val cardLayount = binding.cardLayout
-
-
-
+        val cardLayout = binding.cardLayout
     }
 }

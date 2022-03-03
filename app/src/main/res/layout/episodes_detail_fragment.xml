@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
-        android:text="The Ricklantis Mixup"
+        android:text="@string/ep_name"
         android:gravity="center"
         android:textSize="30sp"
         android:textColor="@color/white"/>
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="30sp"
-        android:text="Дата выпуска"
+        android:text="@string/air_date"
         android:textColor="@color/locationColor"/>
 
     <TextView
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="27sp"
         android:textColor="@color/white"
-        android:text="September 10, 2017"/>
+        android:text="@string/air_date_name"/>
     
     <TextView
         android:id="@+id/episodeNumber"
@@ -48,7 +48,7 @@
         android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@id/airDateName"
         android:textColor="@color/locationColor"
-        android:text="Номер эпизода:"
+        android:text="@string/ep_number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/episodeNumber"
         android:textSize="27sp"
         android:textColor="@color/white"
-        android:text="S03E07"
+        android:text="@string/ep_number_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

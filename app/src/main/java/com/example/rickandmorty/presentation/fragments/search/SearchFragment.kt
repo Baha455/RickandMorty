@@ -44,7 +44,7 @@ class SearchFragment: Fragment() {
 
     private fun initRv(){
         viewModel.chars.observe(viewLifecycleOwner,{
-            adapterChar.appendList(it.results)
+            adapterChar.appendList(it.results as MutableList<Characters>)
         })
         binding.charRv.adapter = adapterChar
         viewModel.locations.observe(viewLifecycleOwner,{
@@ -58,7 +58,6 @@ class SearchFragment: Fragment() {
     }
 
     private fun getData(){
-
         binding.btnStart.setOnClickListener{
             val etText = binding.searchTv.text.toString()
             viewModel.getCharsByName(etText)
@@ -68,13 +67,13 @@ class SearchFragment: Fragment() {
     }
 
     private fun setupListeners(){
-        adapterChar.onShopItemClickListener = {
+        adapterChar.onItemClickListener ={
             toCharDetailFragment(it)
         }
         adapterLoc.onShopItemClickListener ={
             toLocDetailFragment(it)
         }
-        adapterEp.onShopItemClickListener = {
+        adapterEp.onShopItemClickListener ={
             toEpDetailFragment(it)
         }
     }

@@ -21,7 +21,7 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Название:"
+                android:text="@string/name"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/name"
-                android:text="Pilot"
+                android:text="@string/episode_name"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 
@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toBottomOf="@id/episode"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="Дата эфира:"
+                android:text="@string/air_date"
                 android:layout_marginTop="5dp"
                 android:textSize="25sp"
                 android:textColor="@color/locationColor"/>
@@ -59,7 +59,7 @@
                 app:layout_constraintTop_toBottomOf="@id/type"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="December 2, 2013"
+                android:text="@string/air_date_name"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 

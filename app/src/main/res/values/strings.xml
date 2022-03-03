@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">Rick and Morty</string>
+    <string name="btn_filter">Фильтр</string>
+    <string name="btn_search">Поиск</string>
+    <string name="btn_prev">P</string>
+    <string name="btn_next">N</string>
+    <string name="searchEt_hint">Выберите параметр</string>
+    <string name="ep_name">The Ricklantis Mixup</string>
+    <string name="air_date">Дата выпуска</string>
+    <string name="air_date_name">September 10, 2017</string>
+    <string name="ep_number">Номер эпизода:</string>
+    <string name="ep_number_name">S03E07</string>
+    <string name="name">Название:</string>
+    <string name="episode_name">Pilot</string>
 
     <string-array name="parameterChar">
         <item>Поиск по</item>
@@ -21,5 +33,14 @@
         <item>Поиск по</item>
         <item>Имя</item>
         <item>Эпизод</item>
+    </string-array>
+
+    <string-array name="filterChar">
+        <item>Поиск по</item>
+        <item>Alive</item>
+        <item>Dead</item>
+        <item>Alien</item>
+        <item>Female</item>
+        <item>Male</item>
     </string-array>
 </resources>

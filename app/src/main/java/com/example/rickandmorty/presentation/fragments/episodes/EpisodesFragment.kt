@@ -43,8 +43,8 @@ class EpisodesFragment: Fragment() {
         initRv()
         getEpisodes()
         initListener()
-        setupSpinnerAdapter()
-        spinner()
+        context?.let { viewModel.setupSpinnerAdapter(binding.spinner, it) }
+        viewModel.spinner(binding.spinner, binding.searchTv)
     }
 
     private fun initRv() {
@@ -76,6 +76,9 @@ class EpisodesFragment: Fragment() {
         }
         binding.btnSearch.setOnClickListener{
             val etText = binding.searchTv.text.toString()
+            viewModel.parameter.observe(viewLifecycleOwner, {
+                parameter = it.toString()
+            })
             when(parameter){
                 "0" -> Toast.makeText(context, "Выберите параметр", Toast.LENGTH_SHORT).show()
                 "1" -> viewModel.searchEpByName(etText)
@@ -87,7 +90,11 @@ class EpisodesFragment: Fragment() {
 
     private fun nextPage(){
         viewModel.episodes.observe(viewLifecycleOwner, {
-            url = it.info.next.toUri()
+            if (it.info.next != null) {
+                url = it.info.next.toUri()
+            } else {
+                Toast.makeText(context, "Вы на последней странице", Toast.LENGTH_SHORT).show()
+            }
         })
         url?.let { viewModel.getEpByUrl(it) }
         Toast.makeText(context, "Новые страницы загружены", Toast.LENGTH_SHORT).show()
@@ -103,40 +110,6 @@ class EpisodesFragment: Fragment() {
         })
         if(url!= null) {
             viewModel.getEpByUrl(url!!)
-        }
-    }
-
-    private fun setupSpinnerAdapter() {
-        context?.let {
-            ArrayAdapter.createFromResource(
-                it.applicationContext,
-                R.array.parameterEP,
-                R.layout.customtxt
-            ).also { adapter ->
-                adapter.setDropDownViewResource(R.layout.dropdown_spinner)
-                binding.spinner.adapter = adapter
-            }
-        }
-    }
-
-    private fun spinner(){
-        binding.spinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                when(p2){
-                    0 -> {parameter = "0"
-                        binding.searchTv.hint = "Выберите параметр"}
-                    1 -> {parameter = "1"
-                        binding.searchTv.hint = "Имя"
-                    }
-                    2 -> {parameter = "2"
-                        binding.searchTv.hint = "S03E07, S01E07, ..." }
-                }
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                binding.searchTv.hint = "Выберите параметр"
-            }
-
         }
     }
 
