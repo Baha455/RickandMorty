@@ -7,9 +7,7 @@ import com.example.rickandmorty.domain.RickAndMortyRepository
 import com.example.rickandmorty.domain.SearchCharByNameUseCase
 import com.example.rickandmorty.domain.SearchEpByNameUseCase
 import com.example.rickandmorty.domain.SearchLocByNameUseCase
-import com.example.rickandmorty.models.CharactersInfo
-import com.example.rickandmorty.models.EpisodesInfo
-import com.example.rickandmorty.models.LocationsInfo
+import com.example.rickandmorty.models.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +19,7 @@ class SearchFragmentViewModel @Inject constructor(private val repository: RickAn
     val chars = MutableLiveData<CharactersInfo>()
     val locations = MutableLiveData<LocationsInfo>()
     val episodes = MutableLiveData<EpisodesInfo>()
+
 
     private val searchCharByName = SearchCharByNameUseCase(repository)
     private val searchLocByName = SearchLocByNameUseCase(repository)

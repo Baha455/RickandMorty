@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty.databinding.EpisodesItemBinding
 import com.example.rickandmorty.models.Characters
 import com.example.rickandmorty.models.Episodes
+import java.util.*
 
-class EpisodeAdapter() : ListAdapter<Episodes, EpisodeAdapter.MyViewHolder>(diffCallback) {
+class EpisodeAdapter() : ListAdapter<Episodes, EpisodeAdapter.MyViewHolder>(DiffCallBackForEP()) {
 
-    var onShopItemClickListener: ((Episodes) -> Unit)? = null
+    private var fullList = mutableListOf<Episodes>()
+    var onItemClickListener: ((Episodes) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
@@ -20,23 +22,9 @@ class EpisodeAdapter() : ListAdapter<Episodes, EpisodeAdapter.MyViewHolder>(diff
         return MyViewHolder(binding)
     }
 
-    companion object {
-        val diffCallback = object : DiffUtil.ItemCallback<Episodes>() {
-            override fun areItemsTheSame(oldItem: Episodes, newItem: Episodes): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(oldItem: Episodes, newItem: Episodes): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
-
-    fun appendList(list: List<Episodes>) {
-        val currentList = currentList.toMutableList()
-        currentList.clear()
-        currentList.addAll(list)
-        submitList(currentList)
+    fun modifyList(list : List<Episodes>) {
+        fullList = list.toMutableList()
+        submitList(list)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -44,7 +32,7 @@ class EpisodeAdapter() : ListAdapter<Episodes, EpisodeAdapter.MyViewHolder>(diff
         holder.airDate.text = episode.air_date
         holder.episode.text = episode.episode
         holder.cardLayout.setOnClickListener{
-            onShopItemClickListener?.invoke(episode)
+            onItemClickListener?.invoke(episode)
         }
     }
 
@@ -52,5 +40,19 @@ class EpisodeAdapter() : ListAdapter<Episodes, EpisodeAdapter.MyViewHolder>(diff
         val airDate = binding.airDate
         val episode = binding.episode
         val cardLayout = binding.cardLayout
+    }
+
+    fun filter(query: CharSequence?) {
+        val list = mutableListOf<Episodes>()
+
+        if(!query.isNullOrEmpty()) {
+            list.addAll(fullList.filter {
+                it.episode.lowercase().contains(query.toString().lowercase())
+            })
+
+        } else {
+            list.addAll(fullList)
+        }
+        submitList(list)
     }
 }

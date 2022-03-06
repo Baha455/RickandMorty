@@ -11,9 +11,7 @@ import com.example.rickandmorty.databinding.SearchFragmentBinding
 import com.example.rickandmorty.models.Characters
 import com.example.rickandmorty.models.Episodes
 import com.example.rickandmorty.models.Locations
-import com.example.rickandmorty.presentation.adapter.CharAdapter
-import com.example.rickandmorty.presentation.adapter.EpisodeAdapter
-import com.example.rickandmorty.presentation.adapter.LocationsAdapter
+import com.example.rickandmorty.presentation.adapter.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,15 +19,17 @@ class SearchFragment: Fragment() {
 
     private lateinit var binding: SearchFragmentBinding
     private val viewModel by viewModels<SearchFragmentViewModel>()
-    private val adapterChar by lazy { CharAdapter() }
-    private val adapterLoc by lazy { LocationsAdapter()}
-    private val adapterEp by lazy { EpisodeAdapter() }
+    private val adapterChar by lazy { CharAdapter2() }
+    private val adapterEp by lazy { CharAdapter2() }
+    private val adapterLoc by lazy { CharAdapter2() }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = SearchFragmentBinding.inflate(layoutInflater)
         return binding.root
@@ -43,18 +43,18 @@ class SearchFragment: Fragment() {
     }
 
     private fun initRv(){
-        viewModel.chars.observe(viewLifecycleOwner,{
-            adapterChar.appendList(it.results as MutableList<Characters>)
-        })
-        binding.charRv.adapter = adapterChar
-        viewModel.locations.observe(viewLifecycleOwner,{
-            adapterLoc.appendList(it.results)
-        })
-        binding.locationsRv.adapter = adapterLoc
         viewModel.episodes.observe(viewLifecycleOwner,{
             adapterEp.appendList(it.results)
         })
+        viewModel.chars.observe(viewLifecycleOwner, {
+            adapterChar.appendList(it.results)
+        })
+        viewModel.locations.observe(viewLifecycleOwner,{
+            adapterLoc.appendList(it.results)
+        })
+        binding.charRv.adapter = adapterChar
         binding.episodesRv.adapter = adapterEp
+        binding.locationsRv.adapter = adapterLoc
     }
 
     private fun getData(){
@@ -67,14 +67,15 @@ class SearchFragment: Fragment() {
     }
 
     private fun setupListeners(){
+
         adapterChar.onItemClickListener ={
-            toCharDetailFragment(it)
+            toCharDetailFragment(it as Characters)
         }
-        adapterLoc.onShopItemClickListener ={
-            toLocDetailFragment(it)
+        adapterLoc.onItemClickListener ={
+            toLocDetailFragment(it as Locations)
         }
-        adapterEp.onShopItemClickListener ={
-            toEpDetailFragment(it)
+        adapterEp.onItemClickListener ={
+            toEpDetailFragment(it as Episodes)
         }
     }
 

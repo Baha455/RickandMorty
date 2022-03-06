@@ -1,7 +1,9 @@
 package com.example.rickandmorty.presentation.fragments.locations
 
+import android.app.Dialog
 import android.content.Context
 import android.net.Uri
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,6 +13,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.R
+import com.example.rickandmorty.databinding.FilterDialogBinding
 import com.example.rickandmorty.domain.*
 import com.example.rickandmorty.models.Locations
 import com.example.rickandmorty.models.LocationsInfo
@@ -24,6 +27,7 @@ class LocationsViewModel @Inject constructor(private val repository: RickAndMort
 
     val locations = MutableLiveData<LocationsInfo>()
     var parameter = MutableLiveData<String>()
+    var parameterFilter = MutableLiveData<String>()
 
     private val getLocationsListUseCase = GetLocationsListUseCase(repository)
     private val searchLocByName = SearchLocByNameUseCase(repository)
@@ -112,6 +116,42 @@ class LocationsViewModel @Inject constructor(private val repository: RickAndMort
                 adapter.setDropDownViewResource(R.layout.dropdown_spinner)
                 spinner.adapter = adapter
             }
+        }
+    }
+
+    fun showDialog(context: Context, layoutInflater: LayoutInflater) {
+        val dialog = context.let { Dialog(it) }
+        val dialogBinding = FilterDialogBinding.inflate(layoutInflater)
+        dialog.setContentView(dialogBinding.root)
+        context.let {
+            ArrayAdapter.createFromResource(
+                it.applicationContext,
+                R.array.filterLoc,
+                R.layout.customtxt
+            ).also { adapter ->
+                adapter.setDropDownViewResource(R.layout.dropdown_spinner)
+                dialogBinding.filterSpinner.adapter = adapter
+            }
+        }
+        dialog.show()
+
+        dialogBinding.filterSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                when(p2){
+                    1 -> parameterFilter.postValue("Dimension C-137")
+
+                    2 -> parameterFilter.postValue("Unknown")
+
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                parameterFilter.postValue("")
+            }
+        }
+        dialogBinding.btnChose.setOnClickListener(){
+            dialog.hide()
         }
     }
 }

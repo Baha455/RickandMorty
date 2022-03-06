@@ -6,15 +6,18 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.CharItemBinding
 import com.example.rickandmorty.models.Characters
+import com.example.rickandmorty.models.Episodes
+import com.example.rickandmorty.models.Locations
 import com.squareup.picasso.Picasso
 import java.util.*
 
 
-open class CharAdapter() : ListAdapter<Characters, CharAdapter.MyViewHolder>(DiffCallBack()) {
-    private var list = mutableListOf<Characters>()
+open class CharAdapter() : ListAdapter<Characters, CharAdapter.MyViewHolder>(DiffCallBackForChar()) {
     private var fullList = mutableListOf<Characters>()
+
     var onItemClickListener: ((Characters) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,12 +27,8 @@ open class CharAdapter() : ListAdapter<Characters, CharAdapter.MyViewHolder>(Dif
         return MyViewHolder(binding)
     }
 
-
-
-    fun appendList(list: List<Characters>) {
-        this.list = list.toMutableList()
-        //fullList.clear()
-        fullList.addAll(this.list)
+    fun modifyList(list : List<Characters>) {
+        fullList = list.toMutableList()
         submitList(list)
     }
 
@@ -55,17 +54,15 @@ open class CharAdapter() : ListAdapter<Characters, CharAdapter.MyViewHolder>(Dif
         val cardLayout = binding.cardLayout
         }
 
-    fun modifyList(list : List<Characters>) {
-        fullList = list.toMutableList()
-        submitList(list)
-    }
-
     fun filter(query: CharSequence?) {
         val list = mutableListOf<Characters>()
 
         if(!query.isNullOrEmpty()) {
             list.addAll(fullList.filter {
-                it.status.lowercase(Locale.getDefault()).contains(query.toString().lowercase(Locale.getDefault()))
+                it.status.lowercase().contains(query.toString().lowercase()) ||
+                        it.gender.lowercase().contains(query.toString().lowercase()) ||
+                        it.species.lowercase().contains(query.toString().lowercase())
+
             })
 
         } else {
@@ -75,36 +72,7 @@ open class CharAdapter() : ListAdapter<Characters, CharAdapter.MyViewHolder>(Dif
         submitList(list)
     }
 
-    /*override fun getFilter(): Filter {
-        return charFilter
-    }
 
-    private val charFilter = object : Filter(){
-        override fun performFiltering(p0: CharSequence?): FilterResults {
-            val filteredList = mutableListOf<Characters>()
-            if (p0 == null || p0.isEmpty()){
-                filteredList.clear()
-                filteredList.addAll(fullList)
-            }else{
-                for (item in fullList){
-                    if (item.status.lowercase().startsWith(p0.toString().lowercase())){
-                        filteredList.add(item)
-                    }
-                }
-            }
-            val result = FilterResults()
-            result.values = filteredList
-            return result
-        }
-
-        override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-            list.clear()
-            list.addAll(p1?.values as MutableList<Characters>)
-            appendList(list)
-
-        }
-
-    }*/
 }
 
 

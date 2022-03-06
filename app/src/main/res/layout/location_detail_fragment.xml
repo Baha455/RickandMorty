@@ -11,7 +11,7 @@
         android:id="@+id/locationName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Citadel of Ricks"
+        android:text="@string/location_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="30sp"
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="30sp"
         android:layout_marginTop="5dp"
-        android:text="Разновидность:"
+        android:text="@string/type"
         android:textColor="@color/locationColor"/>
 
     <TextView
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@id/type"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Space station"
+        android:text="@string/type_name"
         android:textSize="27sp"
         android:textColor="@color/white"/>
 
@@ -50,7 +50,7 @@
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Измерение:"
+        android:text="@string/dimension"
         android:textColor="@color/locationColor"
         android:layout_marginTop="5dp"/>
 
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/dimension"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="unknown"
+        android:text="@string/dimension_name"
         android:textSize="27sp"
         android:textColor="@color/white"/>
 

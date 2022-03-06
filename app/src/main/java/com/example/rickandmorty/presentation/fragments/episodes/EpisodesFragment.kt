@@ -1,20 +1,17 @@
 package com.example.rickandmorty.presentation.fragments.episodes
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.EpisodesFragmentBinding
 import com.example.rickandmorty.models.Episodes
+import com.example.rickandmorty.presentation.adapter.CharAdapter2
 import com.example.rickandmorty.presentation.adapter.EpisodeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,10 +21,7 @@ class EpisodesFragment: Fragment() {
     private lateinit var binding: EpisodesFragmentBinding
     private val viewModel by viewModels<EpisodesViewModel>()
     private val adapter by lazy { EpisodeAdapter() }
-    var page = 1
     lateinit var parameter: String
-    var url: Uri? = null
-    var pages: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,31 +43,13 @@ class EpisodesFragment: Fragment() {
 
     private fun initRv() {
         viewModel.episodes.observe(viewLifecycleOwner, {
-            adapter.appendList(it.results)
+            adapter.modifyList(it.results)
+
         })
         binding.episodesRv.adapter = adapter
     }
 
     private fun getEpisodes() {
-        viewModel.episodes.observe(viewLifecycleOwner,{
-            pages = it.info.pages
-        })
-        binding.btnNext.setOnClickListener {
-            if (page ==pages) {
-                Toast.makeText(context, "Вы на последней странице", Toast.LENGTH_SHORT).show()
-            }else{
-                page++
-                nextPage()
-            }
-        }
-        binding.btnPrev.setOnClickListener {
-            if (page <= 1) {
-                Toast.makeText(context, "Вы на первой странице", Toast.LENGTH_SHORT).show()
-            }else{
-                page--
-                prevPage()
-            }
-        }
         binding.btnSearch.setOnClickListener{
             val etText = binding.searchTv.text.toString()
             viewModel.parameter.observe(viewLifecycleOwner, {
@@ -86,41 +62,31 @@ class EpisodesFragment: Fragment() {
 
             }
         }
-    }
 
-    private fun nextPage(){
-        viewModel.episodes.observe(viewLifecycleOwner, {
-            if (it.info.next != null) {
-                url = it.info.next.toUri()
-            } else {
-                Toast.makeText(context, "Вы на последней странице", Toast.LENGTH_SHORT).show()
-            }
-        })
-        url?.let { viewModel.getEpByUrl(it) }
-        Toast.makeText(context, "Новые страницы загружены", Toast.LENGTH_SHORT).show()
-    }
+        binding.btnFilter.setOnClickListener{
+            context?.let { it1 -> viewModel.showDialog(it1, layoutInflater) }
+            filterList()
+        }
 
-    private fun prevPage(){
-        viewModel.episodes.observe(viewLifecycleOwner,{
-            if (it.info.prev!= null) {
-                url = it.info.prev.toUri()
-            }else{
-                Toast.makeText(context, "Вы на первой странице", Toast.LENGTH_SHORT).show()
-            }
-        })
-        if(url!= null) {
-            viewModel.getEpByUrl(url!!)
+        binding.btnNext.setOnClickListener{
+            viewModel.getEpByUrl("https://rickandmortyapi.com/api/episode".toUri())
         }
     }
 
     private fun initListener(){
-        adapter.onShopItemClickListener = {
-            toEpisodesDetailFragment(it)
+        adapter.onItemClickListener = {
+            toEpisodesDetailFragment(it as Episodes)
         }
     }
 
     private fun toEpisodesDetailFragment(episodes: Episodes){
         val destination = EpisodesFragmentDirections.actionEpisodesFragmentToEpisodeDetailFragment(episodes)
         findNavController().navigate(destination)
+    }
+
+    private fun filterList(){
+        viewModel.parameterFilter.observe(viewLifecycleOwner,{
+            adapter.filter(it)
+        })
     }
 }

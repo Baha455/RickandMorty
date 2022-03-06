@@ -3,7 +3,7 @@
     <string name="btn_filter">Фильтр</string>
     <string name="btn_search">Поиск</string>
     <string name="btn_prev">P</string>
-    <string name="btn_next">N</string>
+    <string name="btn_next">Reset</string>
     <string name="searchEt_hint">Выберите параметр</string>
     <string name="ep_name">The Ricklantis Mixup</string>
     <string name="air_date">Дата выпуска</string>
@@ -12,6 +12,27 @@
     <string name="ep_number_name">S03E07</string>
     <string name="name">Название:</string>
     <string name="episode_name">Pilot</string>
+    <string name="chose_filter">Закрыть</string>
+    <string name="Rick">Рик</string>
+    <string name="status_name">Alive</string>
+    <string name="gender_name">Human</string>
+    <string name="species">Пренадлежность:</string>
+    <string name="speciesName">Male</string>
+    <string name="first_location">Первое появление:</string>
+    <string name="first_location_name">Первая встреча:</string>
+    <string name="char_name">Dr. Xenon Bloom</string>
+    <string name="status">Dead</string>
+    <string name="last_location">Последняя встреча:</string>
+    <string name="location_name">Citadel of Ricks</string>
+    <string name="type">Разновидность:</string>
+    <string name="type_name">Space station</string>
+    <string name="dimension">Измерение:</string>
+    <string name="dimension_name">unknown</string>
+    <string name="loc_name">Название:</string>
+    <string name="planet_name">Earth (C-137)</string>
+    <string name="planet">Planet</string>
+    <string name="search_by_name">Поиск по имени</string>
+    <string name="anatomy_park">Anatomy Park</string>
 
     <string-array name="parameterChar">
         <item>Поиск по</item>
@@ -36,11 +57,25 @@
     </string-array>
 
     <string-array name="filterChar">
-        <item>Поиск по</item>
+        <item>Фильтр</item>
         <item>Alive</item>
         <item>Dead</item>
         <item>Alien</item>
         <item>Female</item>
         <item>Male</item>
+        <item>Human</item>
+    </string-array>
+
+    <string-array name="filterLoc">
+        <item>Фильтр</item>
+        <item>Dimension C-137</item>
+        <item>Unknown</item>
+    </string-array>
+
+    <string-array name="filterEP">
+        <item>Фильтр</item>
+        <item>Season1</item>
+        <item>Season2</item>
+
     </string-array>
 </resources>

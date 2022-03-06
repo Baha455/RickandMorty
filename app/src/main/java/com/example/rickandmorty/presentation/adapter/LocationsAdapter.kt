@@ -10,9 +10,10 @@ import com.example.rickandmorty.models.Characters
 import com.example.rickandmorty.models.Episodes
 import com.example.rickandmorty.models.Locations
 
-class LocationsAdapter(): ListAdapter<Locations, LocationsAdapter.MyViewHolder>(diffCallback) {
+class LocationsAdapter(): ListAdapter<Locations, LocationsAdapter.MyViewHolder>(DiffCallBackForLoc()) {
 
-    var onShopItemClickListener: ((Locations) -> Unit)? = null
+    private var fullList = mutableListOf<Locations>()
+    var onItemClickListener: ((Locations) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
@@ -21,23 +22,9 @@ class LocationsAdapter(): ListAdapter<Locations, LocationsAdapter.MyViewHolder>(
         return MyViewHolder(binding)
     }
 
-    companion object {
-        val diffCallback = object : DiffUtil.ItemCallback<Locations>() {
-            override fun areItemsTheSame(oldItem: Locations, newItem: Locations): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(oldItem: Locations, newItem: Locations): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
-
-    fun appendList(list: List<Locations>) {
-        val currentList = currentList.toMutableList()
-        currentList.clear()
-        currentList.addAll(list)
-        submitList(currentList)
+    fun modifyList(list : List<Locations>) {
+        fullList = list.toMutableList()
+        submitList(list)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -46,7 +33,7 @@ class LocationsAdapter(): ListAdapter<Locations, LocationsAdapter.MyViewHolder>(
         holder.planetName.text = locations.name
         holder.specificName.text = locations.type
         holder.cardLayout.setOnClickListener{
-            onShopItemClickListener?.invoke(locations)
+            onItemClickListener?.invoke(locations)
         }
     }
 
@@ -55,5 +42,19 @@ class LocationsAdapter(): ListAdapter<Locations, LocationsAdapter.MyViewHolder>(
         val dimensionName = binding.dimensionName
         val specificName = binding.specific
         val cardLayout = binding.cardLayout
+    }
+
+    fun filter(query: CharSequence?) {
+        val list = mutableListOf<Locations>()
+
+        if(!query.isNullOrEmpty()) {
+            list.addAll(fullList.filter {
+                it.dimension.lowercase().contains(query.toString().lowercase())
+            })
+
+        } else {
+            list.addAll(fullList)
+        }
+        submitList(list)
     }
 }

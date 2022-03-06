@@ -20,7 +20,7 @@
         android:id="@+id/nameName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Рик"
+        android:text="@string/Rick"
         app:layout_constraintTop_toBottomOf="@id/charImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
         android:id="@+id/statusName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Alive"
+        android:text="@string/status_name"
         android:textSize="27sp"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/nameName"
@@ -45,7 +45,7 @@
         android:id="@+id/genderName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Human"
+        android:text="@string/gender_name"
         app:layout_constraintTop_toTopOf="@id/statusName"
         android:textSize="27sp"
         app:layout_constraintStart_toEndOf="@id/statusName"
@@ -56,7 +56,7 @@
         android:id="@+id/species"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Пренадлежность:"
+        android:text="@string/species"
         app:layout_constraintTop_toBottomOf="@id/genderName"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
         android:id="@+id/speciesName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Male"
+        android:text="@string/speciesName"
         android:textSize="27sp"
         app:layout_constraintTop_toBottomOf="@id/species"
         android:textColor="@color/white"
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/speciesName"
         android:textSize="30sp"
-        android:text="Первое появление:"
+        android:text="@string/first_location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/locationColor"/>
@@ -91,7 +91,7 @@
         android:id="@+id/firstLocationName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Первая встреча:"
+        android:text="@string/first_location_name"
         android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@id/firstLocation"
         android:textColor="@color/white"
@@ -107,7 +107,5 @@
         app:layout_constraintTop_toBottomOf="@id/firstLocationName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

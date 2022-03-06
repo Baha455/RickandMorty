@@ -22,7 +22,7 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Название:"
+                android:text="@string/loc_name"
                 android:textSize="23sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,8 +36,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/name"
-                android:text="Earth (C-137)"
+                android:text="@string/planet_name"
                 android:textColor="@color/white"
+                android:gravity="center"
                 android:textSize="17sp"/>
 
 
@@ -48,7 +49,7 @@
                 app:layout_constraintTop_toBottomOf="@id/planetName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="Разновидность:"
+                android:text="@string/type"
                 android:layout_marginTop="5dp"
                 android:textSize="23sp"
                 android:textColor="@color/locationColor"/>
@@ -60,7 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@id/type"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="Planet"
+                android:text="@string/planet"
                 android:textColor="@color/white"
                 android:textSize="17sp"/>
 
@@ -72,7 +73,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="5dp"
-                android:text="Измерение:"
+                android:text="@string/dimension"
                 android:textSize="23sp"
                 android:textColor="@color/locationColor"/>
 
@@ -84,9 +85,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/white"
-                android:text="Dimension C-137"
+                android:text="@string/dimension_name"
                 android:textSize="17sp"/>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

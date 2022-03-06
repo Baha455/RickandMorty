@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.rickandmorty.databinding.CharactersFragmentBinding
 import com.example.rickandmorty.databinding.EpisodesDetailFragmentBinding
-import com.example.rickandmorty.databinding.EpisodesFragmentBinding
-import com.example.rickandmorty.presentation.fragments.characters.CharDetailFragmentArgs
 
 class EpisodeDetailFragment:Fragment(){
     private lateinit var binding: EpisodesDetailFragmentBinding
