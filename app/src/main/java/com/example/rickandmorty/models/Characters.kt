@@ -1,5 +1,6 @@
 package com.example.rickandmorty.models
 import android.os.Parcelable
+import com.example.rickandmorty.presentation.adapter.Equatable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -43,4 +44,4 @@ data class Characters (
 	@SerializedName("episode") val episode : List<String>,
 	@SerializedName("url") val url : String,
 	@SerializedName("created") val created : String
-) : Parcelable
+) : Equatable, Parcelable

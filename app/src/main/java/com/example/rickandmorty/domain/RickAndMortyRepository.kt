@@ -18,7 +18,6 @@ interface RickAndMortyRepository {
     suspend fun searchCharByName(name: String): Response<CharactersInfo>
     suspend fun searchCharByStatus(status: String): Response<CharactersInfo>
     suspend fun searchCharBySpecies(species: String): Response<CharactersInfo>
-    suspend fun searchCharByType(type: String): Response<CharactersInfo>
     suspend fun searchCharByGender(gender: String): Response<CharactersInfo>
     suspend fun searchLocByName(name: String): Response<LocationsInfo>
     suspend fun searchLocByType(type:String): Response<LocationsInfo>

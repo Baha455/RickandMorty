@@ -88,42 +88,7 @@ class EpisodesViewModel @Inject constructor(private val repository: RickAndMorty
         }
     }
 
-    fun spinner(spinner: Spinner, searchTv: EditText){
-        spinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                when(p2){
-                    0 -> {parameter.postValue("0")
-                        searchTv.hint = "Выберите параметр"
-                    }
-                    1 -> {parameter.postValue("1")
-                        searchTv.hint = "Имя"
-                    }
-                    2 -> {parameter.postValue("2")
-                        searchTv.hint = "S03E07, S01E07, ..." }
-                }
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                searchTv.hint = "Выберите параметр"
-            }
-
-        }
-    }
-
-    fun setupSpinnerAdapter(spinner: Spinner, context: Context) {
-        context.let {
-            ArrayAdapter.createFromResource(
-                it.applicationContext,
-                R.array.parameterEP,
-                R.layout.customtxt
-            ).also { adapter ->
-                adapter.setDropDownViewResource(R.layout.dropdown_spinner)
-                spinner.adapter = adapter
-            }
-        }
-    }
-
-    fun showDialog(context: Context, layoutInflater: LayoutInflater) {
+    fun showDialog(context: Context, layoutInflater: LayoutInflater, searchTv: EditText) {
         val dialog = context.let { Dialog(it) }
         val dialogBinding = FilterDialogBinding.inflate(layoutInflater)
         dialog.setContentView(dialogBinding.root)
@@ -143,9 +108,14 @@ class EpisodesViewModel @Inject constructor(private val repository: RickAndMorty
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 when(p2){
-                    1 -> parameterFilter.postValue("S01")
+                    0 -> {parameter.postValue("0")
+                        searchTv.hint = "Выберите параметр"
+                    }
+                    1 -> {parameterFilter.postValue("1")
+                        searchTv.hint = "Название эпизода"}
 
-                    2 -> parameterFilter.postValue("S02")
+                    2 -> {parameterFilter.postValue("2")
+                        searchTv.hint = "Номер эпизода. Пример:S03E07 "}
 
                 }
             }

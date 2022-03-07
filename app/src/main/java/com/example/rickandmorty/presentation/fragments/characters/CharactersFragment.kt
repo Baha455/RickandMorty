@@ -11,14 +11,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.rickandmorty.databinding.CharactersFragmentBinding
 import com.example.rickandmorty.models.Characters
-import com.example.rickandmorty.presentation.adapter.CharAdapter
+import com.example.rickandmorty.presentation.adapter.SearchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 open class CharactersFragment:Fragment() {
 
     private lateinit var binding: CharactersFragmentBinding
-    private val charAdapter by lazy { CharAdapter() }
+    private val charAdapter by lazy { SearchAdapter() }
     val viewModel by viewModels<CharactersViewModel>()
     private lateinit var parameter: String
 
@@ -36,13 +36,11 @@ open class CharactersFragment:Fragment() {
         getCharacters()
         initRv()
         initListener()
-        viewModel.spinner(binding.spinner, binding.searchTv)
-        context?.let { viewModel.setupSpinnerAdapter(binding.spinner, it) }
     }
 
     private fun initRv() {
         viewModel.characters.observe(viewLifecycleOwner, {
-            charAdapter.modifyList(it.results)
+            charAdapter.appendList(it.results)
         })
         binding.charRv.adapter = charAdapter
     }
@@ -50,22 +48,23 @@ open class CharactersFragment:Fragment() {
     private fun getCharacters() {
         binding.btnSearch.setOnClickListener{
             val etText = binding.searchTv.text.toString()
-            viewModel.parameterSearch.observe(viewLifecycleOwner,{
+            viewModel.parameterFilter.observe(viewLifecycleOwner,{
                 parameter = it.toString()
             })
             when(parameter){
                 "0" -> Toast.makeText(context, "Выберите параметр", Toast.LENGTH_SHORT).show()
-                "1" -> viewModel.searchByName(etText)
-                "2" -> viewModel.searchByStatus(etText)
-                "3" -> viewModel.searchBySpecies(etText)
-                "4" -> viewModel.searchByType(etText)
-                "5" -> viewModel.searchByGender(etText)
+                "1" -> viewModel.searchByStatus("Alive")
+                "2" -> viewModel.searchByStatus("Dead")
+                "3" -> viewModel.searchBySpecies("Alien")
+                "4" -> viewModel.searchByGender("Female")
+                "5" -> viewModel.searchBySpecies("Human")
+                "6" -> viewModel.searchByName(etText)
             }
         }
 
         binding.btnFilter.setOnClickListener{
-            context?.let { it1 -> viewModel.showDialog(it1, layoutInflater) }
-            filterList()
+            context?.let { it1 -> viewModel.showDialog(it1, layoutInflater, binding.searchTv) }
+
         }
 
         binding.btnNext.setOnClickListener{
@@ -84,11 +83,6 @@ open class CharactersFragment:Fragment() {
         findNavController().navigate(destination)
     }
 
-    private fun filterList(){
-        viewModel.parameterFilter.observe(viewLifecycleOwner,{
-            charAdapter.filter(it)
-        })
-    }
 }
 
 

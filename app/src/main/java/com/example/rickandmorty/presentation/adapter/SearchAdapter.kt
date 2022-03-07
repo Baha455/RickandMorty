@@ -14,7 +14,7 @@ import com.example.rickandmorty.models.Locations
 import com.squareup.picasso.Picasso
 
 
-open class CharAdapter2() : ListAdapter<Any, RecyclerView.ViewHolder>(DiffCallBackForCharAd()) {
+open class SearchAdapter() : ListAdapter<Equatable, RecyclerView.ViewHolder>(DiffCallBackForCharAd1()) {
     private var fullList = mutableListOf<Any>()
 
     var onItemClickListener: ((Any) -> Unit)? = null
@@ -63,7 +63,7 @@ open class CharAdapter2() : ListAdapter<Any, RecyclerView.ViewHolder>(DiffCallBa
     }
 
 
-    fun appendList(list: List<Any>) {
+    fun appendList(list: List<Equatable>) {
         fullList.addAll(list)
         submitList(list)
     }

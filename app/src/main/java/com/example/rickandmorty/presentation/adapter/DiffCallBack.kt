@@ -4,52 +4,43 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.rickandmorty.models.Characters
 import com.example.rickandmorty.models.Episodes
 import com.example.rickandmorty.models.Locations
-class DiffCallBackForChar: DiffUtil.ItemCallback<Characters>() {
 
-    override fun areItemsTheSame(oldItem: Characters, newItem: Characters): Boolean {
-        return oldItem.id ==newItem.id
+interface Equatable {
+    override fun equals(other: Any?): Boolean
+}
+class DiffCallBackForCharAd1: DiffUtil.ItemCallback<Equatable>() {
+
+    override fun areItemsTheSame(oldItem: Equatable, newItem: Equatable): Boolean {
+        return when{
+            oldItem is Characters && newItem is Characters ->{
+                oldItem.id == newItem.id
+            }
+            oldItem is Locations && newItem is Characters -> {
+                oldItem.id == newItem.id
+            }
+            oldItem is Episodes && newItem is Episodes -> {
+                oldItem.id == newItem.id
+            }
+            else -> false
+        }
 
     }
 
-    override fun areContentsTheSame(oldItem: Characters, newItem: Characters): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(oldItem: Equatable, newItem: Equatable): Boolean {
+        return when{
+            oldItem is Characters && newItem is Characters ->{
+                oldItem == newItem
+            }
+            oldItem is Locations && newItem is Characters -> {
+                oldItem == newItem
+            }
+            oldItem is Episodes && newItem is Episodes -> {
+                oldItem == newItem
+            }
+            else -> false
+        }
     }
 }
 
-class DiffCallBackForLoc: DiffUtil.ItemCallback<Locations>() {
-
-    override fun areItemsTheSame(oldItem: Locations, newItem: Locations): Boolean {
-        return oldItem.id ==newItem.id
-
-    }
-
-    override fun areContentsTheSame(oldItem: Locations, newItem: Locations): Boolean {
-        return oldItem == newItem
-    }
-}
-
-class DiffCallBackForEP: DiffUtil.ItemCallback<Episodes>() {
-
-    override fun areItemsTheSame(oldItem: Episodes, newItem: Episodes): Boolean {
-        return oldItem.id ==newItem.id
-
-    }
-
-    override fun areContentsTheSame(oldItem: Episodes, newItem: Episodes): Boolean {
-        return oldItem == newItem
-    }
-}
-
-class DiffCallBackForCharAd: DiffUtil.ItemCallback<Any>() {
-
-    override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-        return oldItem == newItem
-
-    }
-
-    override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
-        return oldItem == newItem
-    }
-}
 
 

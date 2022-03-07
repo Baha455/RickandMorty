@@ -12,8 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.rickandmorty.databinding.LocationFragmentBinding
 import com.example.rickandmorty.models.Locations
-import com.example.rickandmorty.presentation.adapter.CharAdapter2
-import com.example.rickandmorty.presentation.adapter.LocationsAdapter
+import com.example.rickandmorty.presentation.adapter.SearchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +20,7 @@ class LocationsFragment: Fragment() {
 
     private lateinit var binding: LocationFragmentBinding
     private val viewModel by viewModels<LocationsViewModel>()
-    private val adapter by lazy { LocationsAdapter() }
+    private val adapter by lazy { SearchAdapter() }
     var page = 1
     lateinit var parameter: String
     var url: Uri? = null
@@ -41,13 +40,11 @@ class LocationsFragment: Fragment() {
         initRv()
         getLocations()
         initListener()
-        context?.let { viewModel.setupSpinnerAdapter(binding.spinner, it) }
-        viewModel.spinner(binding.spinner, binding.searchTv)
     }
 
     private fun initRv(){
         viewModel.locations.observe(viewLifecycleOwner,{
-            adapter.modifyList(it.results)
+            adapter.appendList(it.results)
         })
         binding.locationsRv.adapter = adapter
     }
@@ -56,7 +53,7 @@ class LocationsFragment: Fragment() {
     private fun getLocations() {
         binding.btnSearch.setOnClickListener{
             val etText = binding.searchTv.text.toString()
-            viewModel.parameter.observe(viewLifecycleOwner, {
+            viewModel.parameterFilter.observe(viewLifecycleOwner, {
                 parameter = it.toString()
             })
             when(parameter){
@@ -68,8 +65,7 @@ class LocationsFragment: Fragment() {
         }
 
         binding.btnFilter.setOnClickListener{
-            context?.let { it1 -> viewModel.showDialog(it1, layoutInflater) }
-            filterList()
+            context?.let { it1 -> viewModel.showDialog(it1, layoutInflater, binding.searchTv) }
         }
 
         binding.btnNext.setOnClickListener{
@@ -88,9 +84,4 @@ class LocationsFragment: Fragment() {
         findNavController().navigate(destination)
     }
 
-    private fun filterList(){
-        viewModel.parameterFilter.observe(viewLifecycleOwner,{
-            adapter.filter(it)
-        })
-    }
 }

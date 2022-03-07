@@ -19,9 +19,9 @@ class SearchFragment: Fragment() {
 
     private lateinit var binding: SearchFragmentBinding
     private val viewModel by viewModels<SearchFragmentViewModel>()
-    private val adapterChar by lazy { CharAdapter2() }
-    private val adapterEp by lazy { CharAdapter2() }
-    private val adapterLoc by lazy { CharAdapter2() }
+    private val adapterChar by lazy { SearchAdapter() }
+    private val adapterEp by lazy { SearchAdapter() }
+    private val adapterLoc by lazy { SearchAdapter() }
 
 
 

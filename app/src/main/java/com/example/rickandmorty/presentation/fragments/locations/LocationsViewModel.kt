@@ -83,43 +83,7 @@ class LocationsViewModel @Inject constructor(private val repository: RickAndMort
         }
     }
 
-    fun spinner(spinner: Spinner, searchTv: EditText){
-        spinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                when(p2){
-                    0 -> {parameter.postValue("0")
-                        searchTv.hint = "Выберите параметр"}
-                    1 -> {parameter.postValue("1")
-                        searchTv.hint = "Имя"
-                    }
-                    2 -> {parameter.postValue("2")
-                        searchTv.hint = "Space station, Resort, Planet" }
-                    3 -> {parameter.postValue("3")
-                        searchTv.hint = "Dimension C-137, unknown..."}
-                }
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                searchTv.hint = "Выберите параметр"
-            }
-
-        }
-    }
-
-    fun setupSpinnerAdapter(spinner: Spinner, context: Context) {
-        context.let {
-            ArrayAdapter.createFromResource(
-                it.applicationContext,
-                R.array.parameterLoc,
-                R.layout.customtxt
-            ).also { adapter ->
-                adapter.setDropDownViewResource(R.layout.dropdown_spinner)
-                spinner.adapter = adapter
-            }
-        }
-    }
-
-    fun showDialog(context: Context, layoutInflater: LayoutInflater) {
+    fun showDialog(context: Context, layoutInflater: LayoutInflater, searchTv: EditText) {
         val dialog = context.let { Dialog(it) }
         val dialogBinding = FilterDialogBinding.inflate(layoutInflater)
         dialog.setContentView(dialogBinding.root)
@@ -139,9 +103,16 @@ class LocationsViewModel @Inject constructor(private val repository: RickAndMort
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 when(p2){
-                    1 -> parameterFilter.postValue("Dimension C-137")
+                    0 -> {parameter.postValue("0")
+                        searchTv.hint = "Выберите параметр"}
+                    1 -> {parameterFilter.postValue("1")
+                        searchTv.hint = "Название"}
 
-                    2 -> parameterFilter.postValue("Unknown")
+                    2 -> {parameterFilter.postValue("2")
+                        searchTv.hint = "Тип: Space station, Resort, Planet"}
+
+                    3 -> {parameterFilter.postValue("3")
+                        searchTv.hint = "Измерение: Dimension C-137, unknown"}
 
                 }
             }

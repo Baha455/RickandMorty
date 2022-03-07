@@ -39,10 +39,6 @@ class RickAndMortyRepositoryImpl @Inject constructor(private val service: RickAn
         return service.searchCharBySpecies(species)
     }
 
-    override suspend fun searchCharByType(type: String): Response<CharactersInfo> {
-        return service.searchCharByType(type)
-    }
-
     override suspend fun searchCharByGender(gender: String): Response<CharactersInfo> {
         return service.searchCharByGender(gender)
     }

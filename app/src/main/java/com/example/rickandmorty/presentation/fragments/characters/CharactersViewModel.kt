@@ -25,7 +25,6 @@ import javax.inject.Inject
 class CharactersViewModel @Inject constructor(private val repository: RickAndMortyRepository) :ViewModel() {
 
     val characters = MutableLiveData<CharactersInfo>()
-    var parameterSearch = MutableLiveData<String>()
     var parameterFilter = MutableLiveData<String>()
 
     init {
@@ -36,7 +35,6 @@ class CharactersViewModel @Inject constructor(private val repository: RickAndMor
     private val searchCharByName = SearchCharByNameUseCase(repository)
     private val searchCharByStatus = SearchCharByStatusUseCase(repository)
     private val searchCharBySpecies = SearchCharBySpeciesUseCase(repository)
-    private val searchCharByType = SearchCharByTypeUseCase(repository)
     private val searchCharByGender = SearchCharByGenderUseCase(repository)
 
     private fun getCharacters(page: Int) {
@@ -84,15 +82,6 @@ class CharactersViewModel @Inject constructor(private val repository: RickAndMor
         }
     }
 
-    fun searchByType(type: String){
-        viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching {
-                val call = searchCharByType.searchCharByType(type)
-                if (call.isSuccessful)characters.postValue(call.body())
-            }
-        }
-    }
-
     fun searchByGender(gender: String){
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
@@ -102,50 +91,7 @@ class CharactersViewModel @Inject constructor(private val repository: RickAndMor
         }
     }
 
-    fun spinner(spinner: Spinner, searchTv:EditText){
-        spinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                when(p2){
-                    0 -> {parameterSearch.postValue("0")
-                        searchTv.hint = "Выберите параметр"
-                    }
-                    1 -> {parameterSearch.postValue("1")
-                        searchTv.hint = "Имя"
-                    }
-                    2 -> {parameterSearch.postValue("2")
-                        searchTv.hint = "Alive, dead, unknown"
-                    }
-                    3 -> {parameterSearch.postValue("3")
-                        searchTv.hint = "Human, alien, unknown..."
-                    }
-                    4 -> {parameterSearch.postValue("4")
-                        searchTv.hint = "Genetic experiment"
-                    }
-                    5 -> {parameterSearch.postValue("5")
-                        searchTv.hint = "Female, male, genderless or unknown"
-                    }
-                }
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                searchTv.hint = "Выберите параметр" }
-            }
-    }
-
-    fun setupSpinnerAdapter(spinner: Spinner, context: Context) {
-        context.let {
-            ArrayAdapter.createFromResource(
-                it.applicationContext,
-                R.array.parameterChar,
-                R.layout.customtxt
-            ).also { adapter ->
-                adapter.setDropDownViewResource(R.layout.dropdown_spinner)
-                spinner.adapter = adapter
-            }
-        }
-    }
-
-    fun showDialog(context: Context, layoutInflater: LayoutInflater) {
+    fun showDialog(context: Context, layoutInflater: LayoutInflater, searchTv:EditText) {
         val dialog = context.let { Dialog(it) }
         val dialogBinding = FilterDialogBinding.inflate(layoutInflater)
         dialog.setContentView(dialogBinding.root)
@@ -165,19 +111,26 @@ class CharactersViewModel @Inject constructor(private val repository: RickAndMor
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 when(p2){
-                    //0 -> parameterFilter.postValue("")
+                    0 -> {parameterFilter.postValue("0")
+                    searchTv.hint = "Выберите параметр"}
 
-                    1 -> parameterFilter.postValue("Alive")
+                    1 -> { parameterFilter.postValue("1")
+                    searchTv.hint = "Alive"}
 
-                    2 -> parameterFilter.postValue("Dead")
+                    2 -> {parameterFilter.postValue("2")
+                    searchTv.hint = "Dead"}
 
-                    3 -> parameterFilter.postValue("Alien")
+                    3 -> {parameterFilter.postValue("3")
+                    searchTv.hint = "Alien"}
 
-                    4 -> parameterFilter.postValue("Female")
+                    4 -> {parameterFilter.postValue("4")
+                    searchTv.hint = "Female"}
 
-                    5 -> parameterFilter.postValue("Male")
+                    5 -> {parameterFilter.postValue("5")
+                    searchTv.hint = "Human"}
 
-                    6 -> parameterFilter.postValue("Human")
+                    6 -> {parameterFilter.postValue("6")
+                    searchTv.hint = "Введите имя"}
                 }
             }
 

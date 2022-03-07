@@ -16,7 +16,7 @@ class EpisodeDetailFragment:Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = EpisodesDetailFragmentBinding.inflate(layoutInflater)
         return binding.root
     }

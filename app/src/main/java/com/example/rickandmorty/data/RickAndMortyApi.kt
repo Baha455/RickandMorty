@@ -1,10 +1,11 @@
 package com.example.rickandmorty.data
 
 import android.net.Uri
-import com.example.rickandmorty.models.*
+import com.example.rickandmorty.models.CharactersInfo
+import com.example.rickandmorty.models.EpisodesInfo
+import com.example.rickandmorty.models.LocationsInfo
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
@@ -43,11 +44,6 @@ interface RickAndMortyApi {
     @GET("api/character/")
     suspend fun searchCharBySpecies(
         @Query("species") species: String
-    ): Response<CharactersInfo>
-
-    @GET("api/character/")
-    suspend fun searchCharByType(
-        @Query("type") type: String
     ): Response<CharactersInfo>
 
     @GET("api/character/")

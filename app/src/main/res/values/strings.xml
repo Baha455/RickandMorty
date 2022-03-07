@@ -33,10 +33,11 @@
     <string name="planet">Planet</string>
     <string name="search_by_name">Поиск по имени</string>
     <string name="anatomy_park">Anatomy Park</string>
+    <string name="earth_replacement_dimension">Earth(Replacement Dimension</string>
+    <string name="abandon_cluster_princess">Abandon Cluster Princess</string>
 
     <string-array name="parameterChar">
         <item>Поиск по</item>
-        <item>Имя</item>
         <item>Статус</item>
         <item>Расса</item>
         <item>Тип</item>
@@ -62,20 +63,21 @@
         <item>Dead</item>
         <item>Alien</item>
         <item>Female</item>
-        <item>Male</item>
         <item>Human</item>
+        <item>Имя</item>
     </string-array>
 
     <string-array name="filterLoc">
         <item>Фильтр</item>
-        <item>Dimension C-137</item>
-        <item>Unknown</item>
+        <item>Название</item>
+        <item>Тип</item>
+        <item>Измер.</item>
     </string-array>
 
     <string-array name="filterEP">
         <item>Фильтр</item>
-        <item>Season1</item>
-        <item>Season2</item>
+        <item>Название</item>
+        <item>Номер</item>
 
     </string-array>
 </resources>
